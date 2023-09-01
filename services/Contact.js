@@ -1,6 +1,6 @@
 const Contact = require('../mongooseSchema/Contact')
 
-class GetContactClass {
+class ContactClass {
   async getContact () {
     try {
       const person = await Contact.find({})
@@ -27,6 +27,36 @@ class GetContactClass {
       throw new Error(error)
     }
   }
+
+  async getContactId (id) {
+    try {
+      const person = await Contact.findById(id)
+      return person
+    } catch (error) {
+      console.log(`Error getting user with ${id}`, error)
+      throw new Error(error)
+    }
+  }
+
+  async updateContact (id, updatedData) {
+    try {
+      const updatedContact = await Contact.findByIdAndUpdate(id, updatedData, { new: true })
+      return updatedContact
+    } catch (error) {
+      console.log(`error updating user with ${id}`, error)
+      throw new Error(error)
+    }
+  }
+
+  async deleteContact (id) {
+    try {
+      const deleteContact = await Contact.findByIdAndDelete(id)
+      return deleteContact
+    } catch (error) {
+      console.log(`error deleteing the user with ${id}`)
+      throw new Error(error)
+    }
+  }
 }
 
-module.exports = new GetContactClass()
+module.exports = new ContactClass()

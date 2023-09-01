@@ -76,7 +76,7 @@ class Authentication {
   }
 
   setToken (data, expirySeconds) {
-    return jwt.sign({ data }, this.opts.secretOrKey, { expiresIn: expirySeconds })
+    return jwt.sign({ data }, this.opts.secretOrKey, { expiresIn: 2000 })
   }
 }
 
