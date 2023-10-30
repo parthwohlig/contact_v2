@@ -36,7 +36,7 @@ class UserClass {
           email: user.email,
           id: user.id
         }
-      })
+      }, 6000)
       return accessToken
     } else {
       res.status(400).json({ message: 'Email and password not matching' })

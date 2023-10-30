@@ -28,7 +28,6 @@ const getContact = async (req, res) => {
   try {
     const person = await Contact1.getContact()
     return res.status(200).json({ person, type: __constants.RESPONSE_MESSAGES.SUCCESS })
-    // return res.send('test')
   } catch (err) {
     return res.json({ type: err.type || __constants.RESPONSE_MESSAGES.SERVER_ERROR, err: err.err || err })
   }
@@ -46,6 +45,6 @@ const getContactId = async (req, res) => {
     return res.json({ type: err.type || __constants.RESPONSE_MESSAGES.SERVER_ERROR, err: err.err || err })
   }
 }
-router.get('/:id', authentication.authenticate, getContactId)
+router.get('/:id', authentication.authenticate('jwt', { session: false }), getContactId)
 
 module.exports = router
